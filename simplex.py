@@ -1,7 +1,7 @@
 class SimplexSolver:
     def __init__(self, objective_function_data, restrictions_data):
         self.auxiliary_variables_len = len(restrictions_data)
-        self.base_labels = ["x" + str(label) for label in range(self.auxiliary_variables_len)]
+        self.base_labels = ["Aux" + str(label) for label in range(self.auxiliary_variables_len)]
         self.non_base_labels = [label for label in objective_function_data.keys()] + self.base_labels
         self.simplex_matrix = self.build_simplex_matrix_from_data(objective_function_data, restrictions_data);
         self.pivot_col = -1
@@ -11,6 +11,11 @@ class SimplexSolver:
         while min(self.simplex_matrix[0]) < 0:
             self.update_pivot_col();
             self.update_pivot_row();
+
+            # Mudar a base
+            tmp = self.non_base_labels[self.pivot_col]
+            self.non_base_labels[self.pivot_col] = self.base_labels[self.pivot_row - 1]
+            self.base_labels[self.pivot_row - 1] = tmp
 
             self.update_pivot_line();
             self.update_lines();

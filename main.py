@@ -1,19 +1,25 @@
+from results import print_table
 from simplex import SimplexSolver
 
+def main():
+    # (obj_funct_data, restrictions_data) = prompt_data()
+    obj_funct_data = { "A": 5, "B": 7, "C": 8 }
+    restrictions_data = [
+        {
+            "name": "Prensa",
+            "quantities": { "A": 1, "B": 1, "C": 2 },
+            "max": 1190
+        },
+        {
+            "name": "Esmalte",
+            "quantities": { "A": 3, "B": 4.5, "C": 1 },
+            "max": 4000
+        },
+    ]
 
-obj ={ "a": 5.0, "b": 7.0, "c": 8.0 }
-rest = [ 
-    { 
-      "name": "Resource 1",
-      "quantities": { "a": 1.0, "b": 1.0, "c": 2.0 },
-      "max": 1190.0
-    },
-    { 
-      "name": "Resource 2",
-      "quantities": { "a": 3.0, "b": 4.5, "c": 1.0 },
-      "max": 4000.0
-    }
-]
+    solver = SimplexSolver(obj_funct_data, restrictions_data)
+    solver.solve()
+    print_table(solver)
 
-simplex = SimplexSolver(obj, rest)
-simplex.solve()
+if __name__ == "__main__":
+    main()
