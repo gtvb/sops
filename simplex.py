@@ -14,6 +14,7 @@ class SimplexSolver:
         self.shadow_prices = []
         self.optimal_points = []
         self.profit = 0
+        self.v_profit = 0
 
         self.simplex_matrix = self.build_simplex_matrix_from_data();
 
@@ -46,6 +47,7 @@ class SimplexSolver:
         self.calculate_viability()
 
     def calculate_viability(self):
+        self.v_profit += self.profit
         for i in range(1, len(self.simplex_matrix)):
             viability_result = 0
 
@@ -58,10 +60,12 @@ class SimplexSolver:
             viability_result += reversed[0]
 
             self.viability_results.append(viability_result)
-            if viability_result >= 0:
-                continue
+            if viability_result < 0:
+                self.deltas_are_viable = False
+                break;
 
-            self.deltas_are_viable = False
+            self.v_profit += self.shadow_prices[i - 1][1] * self.deltas[i - 1]
+
 
     def find_shadow_prices(self):
         reversed = self.simplex_matrix[0][::-1]
@@ -121,7 +125,7 @@ class SimplexSolver:
 
             res = dividend / divisor 
 
-            if res < min_val:
+            if res < min_val and res >= 0:
                 min_val = res
                 min_index = i
 

@@ -55,7 +55,7 @@ def prompt_data():
     console.rule("Variações")
     deltas = []
     for r in restrictions_data:
-        delta = float(console.input(f"[bold]> Variação no estoque de '{r['name']}' (Adicione '-' para remoção do estoque, e '+' para adição:[/bold] "))
+        delta = float(console.input(f"[bold]> Variação no estoque de '{r['name']}' (Adicione '-' para remoção do estoque):[/bold] "))
         deltas.append(delta)
     console.print(deltas)
         
@@ -95,11 +95,11 @@ def print_table(simplex_obj: SimplexSolver):
 
     console.print("[b]Pontos ótimos:[/b]")
     for (name, value) in simplex_obj.optimal_points:
-        console.print(f"[b]> {name}:[/b] {value}")
+        console.print(f"[b]> {name}:[/b] {round(value, 2)}")
 
     console.print("[b]Preços-Sombra:[/b]")
     for (name, value) in simplex_obj.shadow_prices:
-        console.print(f"[b]> {name}:[/b] {value}")
+        console.print(f"[b]> {name}:[/b] {round(value, 2)}")
         
     console.rule("Análise de Viabilidade")
     v_table = Table(title=None, show_lines=True)
@@ -114,4 +114,6 @@ def print_table(simplex_obj: SimplexSolver):
 
     console.print(v_table)
     console.print(f"[b]É viável:[/b] {simplex_obj.deltas_are_viable}")
+    if simplex_obj.deltas_are_viable:
+        console.print(f"[b]Novo lucro:[/b] {simplex_obj.v_profit}")
     console.rule()

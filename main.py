@@ -1,27 +1,21 @@
 from results import print_table, prompt_data
 from simplex import SimplexSolver
+import json, sys
 
 def main():
-    # (obj_funct_data, restrictions_data, deltas) = prompt_data()
-    obj_funct_data = { "E": 80, "M": 70, "A": 100, "P": 16 }
-    restrictions_data = [
-        {
-            "name": "X1",
-            "quantities": { "E": 1, "M": 1, "A": 1, "P": 4 },
-            "max": 250
-        },
-        {
-            "name": "X2",
-            "quantities": { "E": 0, "M": 1, "A": 1, "P": 2 },
-            "max": 600
-        },
-        {
-            "name": "X3",
-            "quantities": { "E": 3, "M": 2, "A": 4, "P": 0 },
-            "max": 500
-        },
-    ]
-    deltas = [250.0, 0.0, 0.0]
+    if len(sys.argv) == 3 and sys.argv[1] == "example":
+        example_index = int(sys.argv[2])
+        with open("example_problems.json") as f:
+            problems = json.load(f)
+            if example_index >= len(problems):
+                print(f"O arquivo de exemplo contém apenas {len(problems)} problemas")
+                return
+            obj_funct_data = problems[example_index]["obj_funct_data"]
+            restrictions_data = problems[example_index]["restrictions_data"]
+            deltas = problems[example_index]["deltas"]
+
+    else:
+        (obj_funct_data, restrictions_data, deltas) = prompt_data()
 
     solver = SimplexSolver(obj_funct_data, restrictions_data, deltas)
     solver.solve()

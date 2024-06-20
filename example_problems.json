@@ -1,0 +1,44 @@
+[
+    {
+    "obj_funct_data": { "E": 80, "M": 70, "A": 100, "P": 16 },
+    "restrictions_data": [
+         {
+             "name": "X1",
+             "quantities": { "E": 1, "M": 1, "A": 1, "P": 4 },
+             "max": 250
+         },
+         {
+             "name": "X2",
+             "quantities": { "E": 0, "M": 1, "A": 1, "P": 2 },
+             "max": 600
+         },
+         {
+             "name": "X3",
+             "quantities": { "E": 3, "M": 2, "A": 4, "P": 0 },
+             "max": 500
+         }
+     ],
+     "deltas": [250.0, 0.0, 0.0]
+    },
+    {
+    "obj_funct_data": { "X1": 20, "X2": 40 },
+    "restrictions_data": [
+        {
+            "name": "A",
+            "quantities": { "X1": 4, "X2": 15 },
+            "max": 60
+        },
+        {
+            "name": "B",
+            "quantities": { "X1": 6, "X2": 30 },
+            "max": 30
+        },
+        {
+            "name": "C",
+            "quantities": { "X1": 8, "X2": 16 },
+            "max": 32
+        }
+    ],
+    "deltas": [6.0, 0.0, -6.4]
+    }
+]
