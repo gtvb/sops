@@ -4,6 +4,14 @@ Esse programa oferece uma interface de simples uso para a solução de problemas
 Utiliza apenas uma dependência para mostrar os resultados no terminal ([rich](https://github.com/Textualize/rich)). 
 Todo o resto é implementado com os recursos nativos da linguagem.
 
+### Estrutura
+
+- `simplex.py`: contém a classe `SimplexSolver` responsável pelas funcionalidades
+de programação linear.
+- `results.py`:  é responsável por fornecer a interface de entrada e mostrar
+os resultados.
+- `main.py`: ponto de entrada.
+
 ### Como executar
 
 Para testar localmente, siga os seguintes passos:
