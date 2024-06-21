@@ -13,7 +13,6 @@ def main():
             obj_funct_data = problems[example_index]["obj_funct_data"]
             restrictions_data = problems[example_index]["restrictions_data"]
             deltas = problems[example_index]["deltas"]
-
     else:
         (obj_funct_data, restrictions_data, deltas) = prompt_data()
 
